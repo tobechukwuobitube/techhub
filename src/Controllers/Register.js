@@ -3,7 +3,7 @@ const Register = db.Register;
 
 export default class RegisterControllers {
   static Register(req, res) {
-    const { firstname, lastname, email, country, preffrence } = req.body;
+    const { firstname, lastname, email, country, prefference } = req.body;
     let mobile = Number(req.body.mobile);
 
     const User = new Register({
@@ -12,7 +12,7 @@ export default class RegisterControllers {
       email,
       mobile,
       country,
-      preffrence,
+      prefference,
     });
 
     try {
@@ -37,8 +37,8 @@ export default class RegisterControllers {
 
   static async FindAll(req, res) {
     const findAll = await Register.find();
-
-    if (!findAll) {
+try {
+     if (!findAll) {
       res.status(400).json({
         message: "no records in the database",
       });
@@ -48,20 +48,36 @@ export default class RegisterControllers {
     res.status(200).json({
       payload: findAll,
     });
+    return;
+  }  catch (error) {
+  if(error) {
+    return res.status(500).json({
+      error:error,
+      messgae:'check the error'
+    });
+  }
+}
   }
 
-  static async getAllMobile(req,res) {
-    const numbers = await Register.find();
-       if (!numbers) {
-         res.status(400).json({
-           message: "no records in the database",
-         });
-         return;
-       }
+  // static async getAllMobile(req,res) {
+  //   const numbers = await Register.find();
+  //   try {
+  //     if (!numbers) {
+  //        res.status(400).json({
+  //          message: "no records in the database",
+  //        });
+  //        return;
+  //      }
 
-       res.status(200).json({
-        payload:number
-  })
+  //      res.status(200).json({
+  //       payload:number
+  // })
+  //   } catch (error) {
+  //     if(err) {
+  //       return error
+  //     }
+  //   }
+       
 
-  }
+  // }
 }

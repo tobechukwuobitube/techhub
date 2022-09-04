@@ -7,7 +7,7 @@ const Register = mongoose.model(
     email: String,
     mobile: Number,
     country: String,
-    prefference:String,
+    prefference: String,
   })
 );
 export default Register;

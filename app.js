@@ -26,12 +26,10 @@ app.use(function (req, res, next) {
 // mongodb database conncetions
 
 db.mongoose
-  .connect(`${uri}`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB} ?? ${uri}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
   })
@@ -43,6 +41,10 @@ db.mongoose
 app.get("/", (req, res) => {
   res.send("Welcome to coding tech-hub");
 });
+
+app.get('/*', (req,res) => {
+  res.send('the requested url does not exist')
+})
 
 app.use(Routes)
 
