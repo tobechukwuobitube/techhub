@@ -25,5 +25,5 @@ router.post(
   Register
 );
 router.get('/getall/user', FindAll );
-router.get("/getall/mobile", getAllMobile);
+// router.get("/getall/mobile", getAllMobile);
 export default router;
